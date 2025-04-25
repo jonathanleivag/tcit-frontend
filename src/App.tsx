@@ -1,33 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import FormCreateComponent from './components/formCreate.component'
+import FormSearchComponent from './components/formSearch.component'
+import TablePostComponent from './components/tablePost.component'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <header className='bg-white'>
+        <section className='container mx-auto flex flex-col items-center'>
+          <img
+            src='/logo.webp'
+            alt='Logo'
+            className='w-56 h-24 object-contain mb-6'
+          />
+          <h1 className='text-center text-4xl font-bold text-primary'>
+            CRUD con Redux Toolkit
+          </h1>
+        </section>
+      </header>
+      <main className='container mx-auto py-5'>
+        <FormSearchComponent />
+        <TablePostComponent />
+        <FormCreateComponent />
+      </main>
     </>
   )
 }
