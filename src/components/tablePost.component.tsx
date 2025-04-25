@@ -1,6 +1,24 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
+import { getEnv } from '../utils/env.util'
+import { ENV } from '../enum'
 
 const TablePostComponent: FC = () => {
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch(`${getEnv(ENV.ENDPOINT)}/post`)
+        const data = await response.json()
+        console.log('🚀 ~ fetchPosts ~ data:', data)
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error('Error fetching posts:', error.message)
+        }
+      }
+    }
+    void fetchPosts()
+    return () => {}
+  }, [])
+
   return (
     <table border={1} cellPadding={5} cellSpacing={0}>
       <thead>
