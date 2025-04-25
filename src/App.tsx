@@ -1,3 +1,4 @@
+import { Toaster } from 'react-hot-toast'
 import FormCreateComponent from './components/formCreate.component'
 import FormSearchComponent from './components/formSearch.component'
 import TablePostComponent from './components/tablePost.component'
@@ -5,6 +6,7 @@ import TablePostComponent from './components/tablePost.component'
 function App() {
   return (
     <>
+      <Toaster position='top-right' />
       <header className='bg-white'>
         <section className='container mx-auto flex flex-col items-center'>
           <img
