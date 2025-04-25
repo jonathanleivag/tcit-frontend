@@ -3,11 +3,11 @@ import { getEnv } from '../utils/env.util'
 import { ENV } from '../enum'
 import { Post, Res } from '../type'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
-import { setPostInitialState } from '../features/post/post.slice'
+import { deletePost, setPostInitialState } from '../features/post/post.slice'
 
 const TablePostComponent: FC = () => {
   const dispatchApp = useAppDispatch()
-  const posts = useAppSelector((state) => state.post.posts)
+  const posts = useAppSelector((state) => state.post.filteredPosts)
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -28,6 +28,22 @@ const TablePostComponent: FC = () => {
     return () => {}
   }, [])
 
+  const handleDelete = async (id: number) => {
+    try {
+      const response = await fetch(`${getEnv(ENV.ENDPOINT)}/post/${id}`, {
+        method: 'DELETE'
+      })
+      const data: Res<Post> = await response.json()
+      if (data.success) {
+        dispatchApp(deletePost(id))
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('Error deleting post:', error.message)
+      }
+    }
+  }
+
   return (
     <table border={1} cellPadding={5} cellSpacing={0}>
       <thead>
@@ -43,7 +59,7 @@ const TablePostComponent: FC = () => {
             <td> {post.name} </td>
             <td> {post.description} </td>
             <td>
-              <button>delete</button>
+              <button onClick={() => handleDelete(post.id)}>delete</button>
             </td>
           </tr>
         ))}

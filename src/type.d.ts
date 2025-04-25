@@ -21,9 +21,14 @@ export interface Post {
 
 export interface PostStateSlice {
   posts: Post[]
+  filteredPosts: Post[]
 }
 
 export interface PostReqBody {
   name: string
   description: string
+}
+
+export interface SearchPostBody {
+  name: string
 }
