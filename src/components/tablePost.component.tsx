@@ -1,14 +1,23 @@
 import { FC, useEffect } from 'react'
 import { getEnv } from '../utils/env.util'
 import { ENV } from '../enum'
+import { Post, Res } from '../type'
+import { useAppDispatch, useAppSelector } from '../hooks/redux'
+import { setPostInitialState } from '../features/post/post.slice'
 
 const TablePostComponent: FC = () => {
+  const dispatchApp = useAppDispatch()
+  const posts = useAppSelector((state) => state.post.posts)
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
         const response = await fetch(`${getEnv(ENV.ENDPOINT)}/post`)
-        const data = await response.json()
-        console.log('🚀 ~ fetchPosts ~ data:', data)
+        const data: Res<Post[]> = await response.json()
+
+        if (data.success) {
+          dispatchApp(setPostInitialState(data.data))
+        }
       } catch (error) {
         if (error instanceof Error) {
           console.error('Error fetching posts:', error.message)
@@ -29,20 +38,15 @@ const TablePostComponent: FC = () => {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Post 1</td>
-          <td>This is the body of post 1</td>
-          <td>
-            <button>delete</button>
-          </td>
-        </tr>
-        <tr>
-          <td>Post 2</td>
-          <td>This is the body of post 2</td>
-          <td>
-            <button>delete</button>
-          </td>
-        </tr>
+        {posts.map((post) => (
+          <tr key={post.id}>
+            <td> {post.name} </td>
+            <td> {post.description} </td>
+            <td>
+              <button>delete</button>
+            </td>
+          </tr>
+        ))}
       </tbody>
     </table>
   )
