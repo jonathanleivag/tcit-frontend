@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from 'react'
+import { toast } from 'react-hot-toast'
 import { motion } from 'framer-motion'
 import { getEnv } from '../utils/env.util'
 import { ENV } from '../enum'
@@ -22,9 +23,12 @@ const TablePostComponent: FC = () => {
 
         if (data.success) {
           dispatchApp(setPostInitialState(data.data))
+        } else {
+          toast.error(data.message)
         }
       } catch (error) {
         if (error instanceof Error) {
+          toast.error('Error fetching posts')
           console.error('Error fetching posts:', error.message)
         }
       }
@@ -41,9 +45,13 @@ const TablePostComponent: FC = () => {
       const data: Res<Post> = await response.json()
       if (data.success) {
         dispatchApp(deletePost(id))
+        toast.success(data.message)
+      } else {
+        toast.error(data.message)
       }
     } catch (error) {
       if (error instanceof Error) {
+        toast.error('Error deleting post')
         console.error('Error deleting post:', error.message)
       }
     }
