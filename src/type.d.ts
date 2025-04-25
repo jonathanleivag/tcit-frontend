@@ -22,3 +22,8 @@ export interface Post {
 export interface PostStateSlice {
   posts: Post[]
 }
+
+export interface PostReqBody {
+  name: string
+  description: string
+}

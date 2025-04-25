@@ -12,10 +12,13 @@ export const postSlice = createSlice({
   reducers: {
     setPostInitialState: (state, action: PayloadAction<Post[]>) => {
       state.posts = action.payload
+    },
+    setPost: (state, action: PayloadAction<Post>) => {
+      state.posts = [action.payload, ...state.posts]
     }
   }
 })
 
-export const { setPostInitialState } = postSlice.actions
+export const { setPostInitialState, setPost } = postSlice.actions
 
 export default postSlice.reducer
