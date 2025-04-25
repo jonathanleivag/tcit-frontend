@@ -1,14 +1,18 @@
-import { FC, useEffect } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { getEnv } from '../utils/env.util'
 import { ENV } from '../enum'
 import { Post, Res } from '../type'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import { deletePost, setPostInitialState } from '../features/post/post.slice'
+import ModalSharedComponent from './shared/modal.shared.component'
 
 const TablePostComponent: FC = () => {
   const dispatchApp = useAppDispatch()
   const posts = useAppSelector((state) => state.post.filteredPosts)
+
+  const [postToDelete, setPostToDelete] = useState<number | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -55,7 +59,6 @@ const TablePostComponent: FC = () => {
           className='overflow-hidden border border-gray-200 rounded-lg shadow-md'
         >
           <table className='min-w-full table-fixed'>
-            {/* Encabezado fijo */}
             <thead className='bg-primary text-white'>
               <tr>
                 <th className='w-1/3 px-6 py-3 text-left text-sm font-semibold'>
@@ -97,8 +100,11 @@ const TablePostComponent: FC = () => {
                       </td>
                       <td className='w-1/3 px-6 py-4 text-center'>
                         <button
-                          onClick={() => handleDelete(post.id)}
-                          className='bg-error text-white px-4 py-2 rounded-md hover:bg-red-600 transition-colors'
+                          onClick={() => {
+                            setPostToDelete(post.id)
+                            setIsModalOpen(true)
+                          }}
+                          className='bg-error text-white px-4 py-2 rounded-md hover:bg-red-600 transition-colors cursor-pointer'
                         >
                           Eliminar
                         </button>
@@ -119,6 +125,32 @@ const TablePostComponent: FC = () => {
               </tbody>
             </table>
           </div>
+          {isModalOpen && (
+            <ModalSharedComponent>
+              <h2 className='text-lg font-semibold mb-4 text-gray-700'>
+                ¿Estás seguro de eliminar esta tarea?
+              </h2>
+              <div className='flex justify-end space-x-4'>
+                <button
+                  onClick={() => setIsModalOpen(false)}
+                  className='px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 transition-colors cursor-pointer'
+                >
+                  Cancelar
+                </button>
+                <button
+                  onClick={async () => {
+                    if (postToDelete !== null) {
+                      await handleDelete(postToDelete)
+                    }
+                    setIsModalOpen(false)
+                  }}
+                  className='px-4 py-2 bg-error text-white rounded hover:bg-red-600 transition-colors cursor-pointer'
+                >
+                  Eliminar
+                </button>
+              </div>
+            </ModalSharedComponent>
+          )}
         </motion.div>
       </div>
     </div>
