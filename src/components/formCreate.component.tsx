@@ -42,6 +42,7 @@ const FormCreateComponent: FC = () => {
       } catch (error) {
         if (error instanceof Error) {
           console.error(error.message)
+          toast.error('Error creating post')
         }
       } finally {
         setIsLoading(false)
