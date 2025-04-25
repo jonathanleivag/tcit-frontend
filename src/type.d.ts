@@ -1,3 +1,5 @@
+import { ReactNode } from 'react'
+
 export type Res<T> =
   | {
       success: true
@@ -31,4 +33,8 @@ export interface PostReqBody {
 
 export interface SearchPostBody {
   name: string
+}
+
+export interface ChildrenProps {
+  children: ReactNode
 }
