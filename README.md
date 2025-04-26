@@ -93,7 +93,7 @@ Debes crear un archivo `.env` en la raíz del proyecto. Puedes usar `.env.exampl
 VITE_ENDPOINT="<your_endpoint>"
 ```
 
-- `VITE_ENDPOINT`: URL base para las llamadas al backend desde Vite ejemplo: http://localhost:3000/api, recuerde que es necesario el '/api' después de la URL.
+- `VITE_ENDPOINT`: URL base para las llamadas al backend desde Vite ejemplo: http://localhost:3000/api, recuerde que es necesario el '/api'.
 
 4. Ejecuta la aplicación en modo desarrollo:
 
