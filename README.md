@@ -69,7 +69,7 @@ Se recomienda utilizar [Volta](https://volta.sh) o `nvm` para gestionar versione
 1. Clona el repositorio:
 
 ```bash
-git clone https://github.com/tu_usuario/tcit-frontend.git
+git clone https://github.com/jonathanleivag/tcit-frontend.git
 cd tcit-frontend
 ```
 
