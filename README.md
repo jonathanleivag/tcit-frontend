@@ -91,7 +91,7 @@ npm run dev
 
 ## 📄 Variables de entorno
 
-Debes crear un archivo `.env` basado en el ejemplo del archivo `.env.example`.
+Debes crear un archivo `.env` en la raíz del proyecto. Puedes usar `.env.example` como plantilla.
 
 ### Variables necesarias
 
