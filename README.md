@@ -1,54 +1,113 @@
-# React + TypeScript + Vite
+# Frontend - Proyecto TCIT
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p align="center">
+  <img src="./public/logo.webp" alt="Logo TCIT" width="300"/>
+</p>
 
-Currently, two official plugins are available:
+Este es el frontend del proyecto **TCIT**, desarrollado con **React**, **TypeScript** y **Tailwind CSS**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🧰 Tecnologías principales
 
-## Expanding the ESLint configuration
+- **Vite** — Bundler ultrarrápido para aplicaciones web
+- **React 19** — Librería para construir interfaces de usuario
+- **TypeScript** — Superset de JavaScript tipado
+- **Tailwind CSS 4** — Framework de utilidades para estilos
+- **Redux** — Manejo de estado global
+- **Formik** — Manejo de formularios en React
+- **Yup** — Validación de formularios
+- **Framer Motion** — Animaciones declarativas para React
+- **React Hot Toast** — Notificaciones modernas
+- **React Icons** — Librería de íconos SVG
+- **ESLint** y **Prettier** — Análisis y formateo de código
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🧩 Requisitos
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+Este proyecto fue desarrollado con la versión:
+
+```bash
+Node.js v22.15.0
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Se recomienda utilizar [Volta](https://volta.sh) o `nvm` para gestionar versiones de Node.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📁 Estructura del proyecto
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
 ```
+.
+├── public/                       # Recursos públicos (imágenes, favicon, etc.)
+├── src/
+│   ├── components/              # Componentes de UI
+│   │   └── shared/              # Elementos compartidos
+│   ├── features/                # Feature slices u organización por dominio
+│   ├── hooks/                   # Hooks personalizados
+│   ├── utils/                   # Funciones de utilidad
+│   ├── App.tsx                  # Componente principal de la app
+│   ├── enum.ts                  # Enums globales
+│   ├── global.css               # Estilos globales
+│   ├── main.tsx                 # Punto de entrada principal
+│   ├── store.ts                 # Configuración de Redux Toolkit
+│   ├── type.d.ts                # Tipos globales
+│   ├── validationSchema.ts      # Esquemas de validación Yup
+│   └── vite-env.d.ts            # Tipado de variables de entorno
+├── .env.example
+├── .gitignore
+├── .nvmrc
+├── .prettierrc
+├── eslint.config.js
+├── index.html
+├── package-lock.json
+├── package.json
+├── README.md
+├── tsconfig.app.json
+├── tsconfig.json
+├── tsconfig.node.json
+└── vite.config.ts
+```
+
+## ⚙️ Instalación y configuración
+
+1. Clona el repositorio:
+
+```bash
+git clone https://github.com/tu_usuario/tcit-frontend.git
+cd tcit-frontend
+```
+
+2. Instala las dependencias:
+
+```bash
+npm install
+```
+
+3. Configura las variables de entorno:
+
+```bash
+cp .env.example .env
+```
+
+4. Ejecuta la aplicación en modo desarrollo:
+
+```bash
+npm run dev
+```
+
+## 📄 Variables de entorno
+
+Debes crear un archivo `.env` basado en `.env.example`.
+
+### Variables necesarias
+
+```env
+VITE_ENDPOINT="<your_endpoint>"
+```
+
+- `VITE_ENDPOINT`: URL base para las llamadas al backend desde Vite.
+
+## 🚀 Scripts disponibles
+
+- `npm run dev` — Inicia el servidor de desarrollo
+- `npm run build` — Compila el proyecto para producción
+- `npm run start` — Sirve la aplicación ya compilada
+- `npm run lint` — Corre ESLint para analizar el código
+
+---
