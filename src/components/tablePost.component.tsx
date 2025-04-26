@@ -5,7 +5,11 @@ import { getEnv } from '../utils/env.util'
 import { ENV } from '../enum'
 import { Post, Res } from '../type'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
-import { deletePost, setPostInitialState } from '../features/post/post.slice'
+import {
+  deletePost,
+  setEdit,
+  setPostInitialState
+} from '../features/post/post.slice'
 import ModalSharedComponent from './shared/modal.shared.component'
 
 const TablePostComponent: FC = () => {
@@ -61,6 +65,15 @@ const TablePostComponent: FC = () => {
     }
   }
 
+  const handleEdit = (post: Post) => {
+    dispatchApp(
+      setEdit({
+        isEdit: true,
+        post
+      })
+    )
+  }
+
   return (
     <div className='flex justify-center my-3'>
       <div className='w-full sm:w-4/5 lg:w-3/5'>
@@ -112,11 +125,17 @@ const TablePostComponent: FC = () => {
                       </td>
                       <td className='w-1/3 px-6 py-4 text-center'>
                         <button
+                          onClick={() => handleEdit(post)}
+                          className='bg-primary text-white px-4 py-2 rounded-md hover:bg-hover transition-colors cursor-pointer mx-2 my-1'
+                        >
+                          Editar
+                        </button>
+                        <button
                           onClick={() => {
                             setPostToDelete(post.id)
                             setIsModalOpen(true)
                           }}
-                          className='bg-error text-white px-4 py-2 rounded-md hover:bg-red-600 transition-colors cursor-pointer'
+                          className='bg-error text-white px-4 py-2 rounded-md hover:bg-red-600 transition-colors cursor-pointer mx-2 my-1'
                         >
                           Eliminar
                         </button>
