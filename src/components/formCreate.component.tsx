@@ -87,7 +87,7 @@ const FormCreateComponent: FC = () => {
           <button
             type='submit'
             disabled={isLoading}
-            className={`bg-primary text-white px-4 py-2 rounded-md transition-colors flex items-center justify-center gap-2 cursor-pointer ${
+            className={`bg-primary w-full text-white px-4 py-2 rounded-md transition-colors flex items-center justify-center gap-2 cursor-pointer ${
               isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-hover'
             }`}
           >
