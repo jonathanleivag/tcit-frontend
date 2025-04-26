@@ -83,11 +83,11 @@ npm i
 cp .env.example .env
 ```
 
-## 📄 Variables de entorno
+#### 📄 Variables de entorno
 
 Debes crear un archivo `.env` en la raíz del proyecto. Puedes usar `.env.example` como plantilla.
 
-### Variables necesarias
+##### Variables necesarias
 
 ```env
 VITE_ENDPOINT="<your_endpoint>"

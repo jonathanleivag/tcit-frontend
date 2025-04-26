@@ -1,10 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { Post, PostStateSlice } from '../../type'
+import { EditPost, Post, PostStateSlice } from '../../type'
 
 const initialState: PostStateSlice = {
   posts: [],
-  filteredPosts: []
+  filteredPosts: [],
+  edit: {
+    isEdit: false,
+    post: undefined
+  }
 }
 
 export const postSlice = createSlice({
@@ -30,6 +34,16 @@ export const postSlice = createSlice({
     },
     resetFilter: (state) => {
       state.filteredPosts = state.posts
+    },
+    setEdit: (state, action: PayloadAction<EditPost>) => {
+      state.edit = action.payload
+    },
+    editPost: (state, action: PayloadAction<Post>) => {
+      const index = state.posts.findIndex(
+        (post) => post.id === action.payload.id
+      )
+      state.posts[index] = action.payload
+      state.filteredPosts[index] = action.payload
     }
   }
 })
@@ -39,7 +53,9 @@ export const {
   setPost,
   deletePost,
   filterPostByName,
-  resetFilter
+  resetFilter,
+  setEdit,
+  editPost
 } = postSlice.actions
 
 export default postSlice.reducer

@@ -21,9 +21,14 @@ export interface Post {
   updatedAt: Date
 }
 
+export interface EditPost {
+  isEdit: boolean
+  post?: Post
+}
 export interface PostStateSlice {
   posts: Post[]
   filteredPosts: Post[]
+  edit: EditPost
 }
 
 export interface PostReqBody {
