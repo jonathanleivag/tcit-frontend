@@ -1,10 +1,8 @@
-# Frontend - Proyecto TCIT
+# TCIT - Frontend
 
 <p align="center">
   <img src="./public/logo.webp" alt="Logo TCIT" width="300"/>
 </p>
-
-Este es el frontend del proyecto **TCIT**, desarrollado con **React**, **TypeScript** y **Tailwind CSS**.
 
 ## 🧰 Tecnologías principales
 
@@ -28,7 +26,7 @@ Este proyecto fue desarrollado con la versión:
 Node.js v22.15.0
 ```
 
-Se recomienda utilizar [Volta](https://volta.sh) o `nvm` para gestionar versiones de Node.
+Se recomienda utilizar [Volta](https://volta.sh) o [nvm](https://github.com/nvm-sh/nvm) para gestionar versiones de Node.
 
 ## 📁 Estructura del proyecto
 
@@ -76,7 +74,7 @@ cd tcit-frontend
 2. Instala las dependencias:
 
 ```bash
-npm install
+npm i
 ```
 
 3. Configura las variables de entorno:
@@ -93,7 +91,7 @@ npm run dev
 
 ## 📄 Variables de entorno
 
-Debes crear un archivo `.env` basado en `.env.example`.
+Debes crear un archivo `.env` basado en el ejemplo del archivo `.env.example`.
 
 ### Variables necesarias
 
@@ -107,7 +105,7 @@ VITE_ENDPOINT="<your_endpoint>"
 
 - `npm run dev` — Inicia el servidor de desarrollo
 - `npm run build` — Compila el proyecto para producción
-- `npm run start` — Sirve la aplicación ya compilada
+- `npm run start` — Inicia el servidor de la aplicación ya compilada
 
 ---
 
