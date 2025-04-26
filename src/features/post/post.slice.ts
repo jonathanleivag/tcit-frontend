@@ -5,7 +5,10 @@ import { EditPost, Post, PostStateSlice } from '../../type'
 const initialState: PostStateSlice = {
   posts: [],
   filteredPosts: [],
-  edit: undefined
+  edit: {
+    isEdit: false,
+    post: undefined
+  }
 }
 
 export const postSlice = createSlice({

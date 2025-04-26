@@ -28,7 +28,7 @@ export interface EditPost {
 export interface PostStateSlice {
   posts: Post[]
   filteredPosts: Post[]
-  edit?: EditPost
+  edit: EditPost
 }
 
 export interface PostReqBody {
