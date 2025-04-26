@@ -14,6 +14,7 @@ const TablePostComponent: FC = () => {
 
   const [postToDelete, setPostToDelete] = useState<number | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isDeleting, setIsDeleting] = useState(false) // Nuevo estado para controlar el botón
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -38,6 +39,7 @@ const TablePostComponent: FC = () => {
   }, [])
 
   const handleDelete = async (id: number) => {
+    setIsDeleting(true)
     try {
       const response = await fetch(`${getEnv(ENV.ENDPOINT)}/post/${id}`, {
         method: 'DELETE'
@@ -54,6 +56,8 @@ const TablePostComponent: FC = () => {
         toast.error('Error deleting post')
         console.error('Error deleting post:', error.message)
       }
+    } finally {
+      setIsDeleting(false)
     }
   }
 
@@ -152,7 +156,10 @@ const TablePostComponent: FC = () => {
                     }
                     setIsModalOpen(false)
                   }}
-                  className='px-4 py-2 bg-error text-white rounded hover:bg-red-600 transition-colors cursor-pointer'
+                  disabled={isDeleting}
+                  className={`px-4 py-2 bg-error text-white rounded hover:bg-red-600 transition-colors cursor-pointer ${
+                    isDeleting ? 'opacity-50 cursor-not-allowed' : ''
+                  }`}
                 >
                   Eliminar
                 </button>
