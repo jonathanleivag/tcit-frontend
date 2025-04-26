@@ -15,7 +15,7 @@ function App() {
             className='w-56 h-24 object-contain mb-6'
           />
           <h1 className='text-center text-4xl font-bold text-primary'>
-            CRUD con Redux Toolkit
+            Challenge de desarrollo
           </h1>
         </section>
       </header>

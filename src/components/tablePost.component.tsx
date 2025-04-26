@@ -5,11 +5,7 @@ import { getEnv } from '../utils/env.util'
 import { ENV } from '../enum'
 import { Post, Res } from '../type'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
-import {
-  deletePost,
-  setEdit,
-  setPostInitialState
-} from '../features/post/post.slice'
+import { deletePost, setPostInitialState } from '../features/post/post.slice'
 import ModalSharedComponent from './shared/modal.shared.component'
 
 const TablePostComponent: FC = () => {
@@ -19,7 +15,6 @@ const TablePostComponent: FC = () => {
   const [postToDelete, setPostToDelete] = useState<number | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
-  const edit = useAppSelector((state) => state.post.edit)
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -64,15 +59,6 @@ const TablePostComponent: FC = () => {
     } finally {
       setIsDeleting(false)
     }
-  }
-
-  const handleEdit = (post: Post) => {
-    dispatchApp(
-      setEdit({
-        isEdit: true,
-        post
-      })
-    )
   }
 
   return (
@@ -125,25 +111,15 @@ const TablePostComponent: FC = () => {
                         {post.description}
                       </td>
                       <td className='w-1/3 px-6 py-4 text-center'>
-                        {edit.post?.id !== post.id && (
-                          <>
-                            <button
-                              onClick={() => handleEdit(post)}
-                              className='bg-primary text-white px-4 py-2 rounded-md hover:bg-hover transition-colors cursor-pointer mx-2 my-1'
-                            >
-                              Editar
-                            </button>
-                            <button
-                              onClick={() => {
-                                setPostToDelete(post.id)
-                                setIsModalOpen(true)
-                              }}
-                              className='bg-error text-white px-4 py-2 rounded-md hover:bg-red-600 transition-colors cursor-pointer mx-2 my-1'
-                            >
-                              Eliminar
-                            </button>
-                          </>
-                        )}
+                        <button
+                          onClick={() => {
+                            setPostToDelete(post.id)
+                            setIsModalOpen(true)
+                          }}
+                          className='bg-error text-white px-4 py-2 rounded-md hover:bg-red-600 transition-colors cursor-pointer mx-2 my-1'
+                        >
+                          Eliminar
+                        </button>
                       </td>
                     </motion.tr>
                   ))}

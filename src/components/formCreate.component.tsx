@@ -1,11 +1,11 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { useFormik } from 'formik'
 import { Post, PostReqBody, Res } from '../type'
 import { getEnv } from '../utils/env.util'
 import { ENV } from '../enum'
-import { useAppDispatch, useAppSelector } from '../hooks/redux'
-import { editPost, setEdit, setPost } from '../features/post/post.slice'
+import { useAppDispatch } from '../hooks/redux'
+import { setPost } from '../features/post/post.slice'
 import { validationSchemaFormCreate } from '../validationSchema'
 
 const FormCreateComponent: FC = () => {
@@ -15,18 +15,6 @@ const FormCreateComponent: FC = () => {
   }
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const AppDispatch = useAppDispatch()
-  const edit = useAppSelector((state) => state.post.edit)
-
-  useEffect(() => {
-    if (edit?.isEdit) {
-      formik.setFieldValue('name', edit?.post?.name)
-      formik.setFieldValue('description', edit?.post?.description)
-    } else {
-      formik.setFieldValue('name', '')
-      formik.setFieldValue('description', '')
-    }
-    return () => {}
-  }, [edit])
 
   const formik = useFormik({
     initialValues,
@@ -34,13 +22,9 @@ const FormCreateComponent: FC = () => {
     onSubmit: async (values, action) => {
       try {
         setIsLoading(true)
-        const method = edit?.isEdit ? 'PUT' : 'POST'
-        const url = edit?.isEdit
-          ? `${getEnv(ENV.ENDPOINT)}/post/${edit?.post?.id}`
-          : `${getEnv(ENV.ENDPOINT)}/post/`
 
-        const response = await fetch(url, {
-          method,
+        const response = await fetch(`${getEnv(ENV.ENDPOINT)}/post/`, {
+          method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
@@ -51,18 +35,8 @@ const FormCreateComponent: FC = () => {
 
         if (data.success) {
           toast.success(data.message)
-          if (edit?.isEdit) {
-            AppDispatch(editPost(data.data))
-          } else {
-            AppDispatch(setPost(data.data))
-          }
+          AppDispatch(setPost(data.data))
           action.resetForm()
-          AppDispatch(
-            setEdit({
-              isEdit: false,
-              post: undefined
-            })
-          )
         } else {
           toast.error(data.message)
         }
@@ -115,7 +89,7 @@ const FormCreateComponent: FC = () => {
             disabled={isLoading}
             className={`bg-primary text-white px-4 py-2 rounded-md transition-colors flex items-center justify-center gap-2 cursor-pointer ${
               isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-hover'
-            } ${edit?.isEdit ? 'w-1/2' : 'w-full'}`}
+            }`}
           >
             {isLoading ? (
               <>
@@ -139,42 +113,12 @@ const FormCreateComponent: FC = () => {
                     d='M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8z'
                   ></path>
                 </svg>
-                {edit?.isEdit ? 'Editando...' : 'Cargando...'}
+                Creando...
               </>
-            ) : edit?.isEdit ? (
-              'Editar'
             ) : (
-              'Crear'
+              ' Crear'
             )}
           </button>
-          {edit?.isEdit && (
-            <button
-              type='button'
-              className={`bg-error hover:bg-red-600 w-1/2 text-white px-4 py-2 rounded-md transition-colors flex items-center justify-center gap-2 cursor-pointer`}
-              onClick={() =>
-                AppDispatch(
-                  setEdit({
-                    isEdit: false,
-                    post: undefined
-                  })
-                )
-              }
-            >
-              <svg
-                className='h-5 w-5 text-white'
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-              >
-                <path
-                  stroke='currentColor'
-                  strokeWidth='2'
-                  d='M12 4v16m8-8H4'
-                ></path>
-              </svg>
-              Limpiar
-            </button>
-          )}
         </div>
       </form>
     </div>
