@@ -83,12 +83,6 @@ npm i
 cp .env.example .env
 ```
 
-4. Ejecuta la aplicación en modo desarrollo:
-
-```bash
-npm run dev
-```
-
 ## 📄 Variables de entorno
 
 Debes crear un archivo `.env` en la raíz del proyecto. Puedes usar `.env.example` como plantilla.
@@ -99,7 +93,13 @@ Debes crear un archivo `.env` en la raíz del proyecto. Puedes usar `.env.exampl
 VITE_ENDPOINT="<your_endpoint>"
 ```
 
-- `VITE_ENDPOINT`: URL base para las llamadas al backend desde Vite.
+- `VITE_ENDPOINT`: URL base para las llamadas al backend desde Vite ejemplo: http://localhost:3001/api, recuerde que es necesario el '/api' despues de la URL.
+
+4. Ejecuta la aplicación en modo desarrollo:
+
+```bash
+npm run dev
+```
 
 ## 🚀 Scripts disponibles
 
