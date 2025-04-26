@@ -108,6 +108,5 @@ VITE_ENDPOINT="<your_endpoint>"
 - `npm run dev` — Inicia el servidor de desarrollo
 - `npm run build` — Compila el proyecto para producción
 - `npm run start` — Sirve la aplicación ya compilada
-- `npm run lint` — Corre ESLint para analizar el código
 
 ---
