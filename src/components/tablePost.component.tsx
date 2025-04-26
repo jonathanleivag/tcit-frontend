@@ -159,7 +159,7 @@ const TablePostComponent: FC = () => {
           {isModalOpen && (
             <ModalSharedComponent>
               <h2 className='text-lg font-semibold mb-4 text-gray-700'>
-                ¿Estás seguro de eliminar esta tarea?
+                ¿Estás seguro de eliminar esta Post?
               </h2>
               <div className='flex justify-end space-x-4'>
                 <button
