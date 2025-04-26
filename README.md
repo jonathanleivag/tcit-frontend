@@ -110,3 +110,5 @@ VITE_ENDPOINT="<your_endpoint>"
 - `npm run start` — Sirve la aplicación ya compilada
 
 ---
+
+🔗 [Repositorio del Backend](https://github.com/jonathanleivag/tcit-backend.git)
